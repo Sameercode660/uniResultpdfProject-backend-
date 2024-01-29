@@ -18,7 +18,7 @@ const getResult = async (req, res)=> {
         pdf.text(`Mother Name: ${String(result.motherName)}`, 10, 30)
         pdf.text(`RollNumber : ${String(result.rollNumber)}`, 10, 40)
         pdf.text(`Course Name : ${String(result.courseName)}`, 10, 50)
-
+        // pdf.addImage('https://dpu.edu.in/img/logo.png', 'PNG', 10, 60, 50, 50)
         const pdfBuffer = pdf.output()
 
         // res.status(200).json({data: result})
