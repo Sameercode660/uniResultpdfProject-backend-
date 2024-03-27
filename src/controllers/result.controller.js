@@ -21,7 +21,7 @@ const getResult = async (req, res) => {
 
     const { rollNumber, motherName, course } = req.body;
 
-    console.log(rollNumber, motherName, course)
+    console.log(rollNumber, motherName, course);
 
     if (course == "fybba(ca)sem-I") {
       var result = await FySem1Result.findOne({
@@ -96,40 +96,53 @@ const setResult = async (req, res) => {
     const sheetName = workbook.SheetNames[0];
 
     const excelData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-
+    console.log(excelData)
     if (course == "fybba(ca)sem-I") {
-
-        if(await FySem1Result.exists()) {
-            await FySem1Result.deleteMany({})
-            var response = await FySem1Result.insertMany(excelData)
-        } else {
-            var response = await FySem1Result.create(excelData);
-        }
+      if (await FySem1Result.exists()) {
+        await FySem1Result.deleteMany({});
+        var response = await FySem1Result.insertMany(excelData);
+      } else {
+        var response = await FySem1Result.create(excelData);
+      }
     } else if (course == "fybba(ca)sem-II") {
-
-      var response = await FySem2Result.create(excelData);
-      
+      if (await FySem2Result.exists()) {
+        await FySem2Result.deleteMany({});
+        var response = await FySem2Result.insertMany(excelData);
+      } else {
+        var response = await FySem2Result.create(excelData);
+      }
     } else if (course == "sybba(ca)sem-I") {
-
-      var response = await SySem1Result.create(excelData);
-
+      if (await SySem1Result.exists()) {
+        await SySem1Result.deleteMany({});
+        var response = await SySem1Result.insertMany(excelData);
+      } else {
+        var response = await SySem1Result.create(excelData);
+      }
     } else if (course == "sybba(ca)sem-II") {
-
-      var response = await SySem2Result.create(excelData);
-
+      if (await SySem2Result.exists()) {
+        await SySem2Result.deleteMany({});
+        var response = await SySem2Result.insertMany(excelData);
+      } else {
+        var response = await SySem2Result.create(excelData);
+      }
     } else if (course == "tybba(ca)sem-I") {
-
-      var response = await TySem1Result.create(excelData);
-
+      if (await TySem1Result.exists()) {
+        await TySem1Result.deleteMany({});
+        console.log('entered in to it')
+        console.log(excelData)
+        var response = await TySem1Result.insertMany(excelData);
+      } else {
+        var response = await TySem1Result.create(excelData);
+      }
     } else if (course == "tybba(ca)sem-II") {
-
-      var response = await TySem2Result.create(excelData);
-
+      if (await TySem2Result.exists()) {
+        await TySem2Result.deleteMany({});
+        var response = await TySem2ResultPdf.insertMany(excelData);
+      } else {
+        var response = await TySem2Result.create(excelData);
+      }
     }
-
-    if (!excelData) {
-      return res.status(400).json({ message: "failed" });
-    }
+    
     return res.status(200).json({ message: "success", response });
   } catch (error) {
     console.log(error);

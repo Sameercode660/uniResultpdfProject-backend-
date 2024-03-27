@@ -1,6 +1,10 @@
 import {jsPDF} from 'jspdf'
-
+import { Grade } from './Grade.utils.js'
 export function SySem1ResultPdf(result) {
+        const totalMarks = ( Number(result.DM) + Number(result.DS) + Number(result.SE) + Number(result.PHP) + Number(result.BigData) + Number(result.EVS))
+
+        const percentage = (totalMarks / 600 * 100)
+
         const pdf = new jsPDF()
         console.log(result)
         pdf.setFont('helvetica', 'bold')
@@ -42,16 +46,16 @@ export function SySem1ResultPdf(result) {
         pdf.text('Environmental Awareness', 10, 140)
         pdf.text(result.EVS, 100, 140)
         
-        pdf.text('--------------------------------------------------------------------------------------------------', 10,140)
+        pdf.text('--------------------------------------------------------------------------------------------------', 10,145)
         
         pdf.setFont('helvetica', 'bold')
         
         pdf.text('Total', 10, 150)
-        pdf.text('400', 100, 150)
+        pdf.text(totalMarks.toString(), 100, 150)
         pdf.text('Percentage', 10, 160)
-        pdf.text(400/500*100 + '%', 100, 160)
+        pdf.text(percentage + '%', 100, 160)
         pdf.text('Grade', 10, 170)
-        pdf.text('A', 100, 170)
+        pdf.text(Grade(percentage), 100, 170)
         
         pdf.setFont('helvetica', 'normal')
         pdf.text('--------------------------------------------------------------------------------------------------', 10,180)

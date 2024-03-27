@@ -1,6 +1,14 @@
+
 import {jsPDF} from 'jspdf'
+import { Grade } from './Grade.utils.js'
 
 export function TySem2ResultPdf(result) {
+
+        const totalMarks = ( Number(result.RTIT) + Number(result.SoftwareTesting) + Number(result.AdvanceJava) + Number(result.Android))
+
+        const percentage = (totalMarks / 400 * 100)
+
+
         const pdf = new jsPDF()
         console.log(result)
         pdf.setFont('helvetica', 'bold')
@@ -24,7 +32,7 @@ export function TySem2ResultPdf(result) {
         pdf.text('Marks', 100, 80)
         
         pdf.setFont('helvetica', 'normal')
-        pdf.text('Recent Trends In Information Technology', 10, 90)
+        pdf.text('RT In Information Technology', 10, 90)
         pdf.text(result.RTIT, 100, 90)
         
         pdf.text('Software Testing', 10, 100)
@@ -36,16 +44,16 @@ export function TySem2ResultPdf(result) {
         pdf.text('Android', 10, 120)
         pdf.text(result.Android, 100, 120)
         
-        pdf.text('--------------------------------------------------------------------------------------------------', 10,140)
+        pdf.text('--------------------------------------------------------------------------------------------------', 10,145)
         
         pdf.setFont('helvetica', 'bold')
         
         pdf.text('Total', 10, 150)
-        pdf.text('400', 100, 150)
+        pdf.text(totalMarks.toString(), 100, 150)
         pdf.text('Percentage', 10, 160)
-        pdf.text(400/500*100 + '%', 100, 160)
+        pdf.text(percentage + '%', 100, 160)
         pdf.text('Grade', 10, 170)
-        pdf.text('A', 100, 170)
+        pdf.text(Grade(percentage), 100, 170)
         
         pdf.setFont('helvetica', 'normal')
         pdf.text('--------------------------------------------------------------------------------------------------', 10,180)
@@ -57,6 +65,6 @@ export function TySem2ResultPdf(result) {
         pdf.text('contact to management', 10, 195)
         pdf.setTextColor('black')
         pdf.setFontSize(16)
-
+        pdf.text('Created by : Mohd Sameer and Nasir Ansari', 10, 220)
         return pdf.output()
 }
