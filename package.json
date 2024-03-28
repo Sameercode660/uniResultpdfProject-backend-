@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --experimental-modules src/index.js"
+    "dev": "nodemon --experimental-modules api/index.js"
   },
   "author": "",
   "license": "ISC",
