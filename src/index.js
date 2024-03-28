@@ -1,6 +1,8 @@
 import { connectDB } from "./db/connection.db.js";
 import { app } from "./app.js";
+import {config} from 'dotenv'
 
+config()
 
 connectDB().then(()=> {
     app.listen(8080, ()=> {

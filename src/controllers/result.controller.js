@@ -29,48 +29,64 @@ const getResult = async (req, res) => {
       });
       if (!result) {
         console.log("Result is not found");
+        return res.status(400).json({message: 'Result not found'})
       }
       var pdfBuffer = FySem1ResultPdf(result);
-    } else if (course == "fybba(ca)sem-II") {
+    }
+    
+    else if (course == "fybba(ca)sem-II") {
       var result = await FySem2Result.findOne({
         $and: [{ rollNumber }, { motherName }],
       });
-      var pdfBuffer = FySem2ResultPdf(result);
       if (!result) {
         console.log("Result is not found");
+        return res.status(400).json({message: 'Result not found'})
       }
-    } else if (course == "sybba(ca)sem-I") {
+      var pdfBuffer = FySem2ResultPdf(result);
+    } 
+    
+    else if (course == "sybba(ca)sem-I") {
       var result = await SySem1Result.findOne({
         $and: [{ rollNumber }, { motherName }],
       });
-      var pdfBuffer = SySem1ResultPdf(result);
       if (!result) {
         console.log("Result is not found");
+        return res.status(400).json({message: 'Result not found'})
       }
-    } else if (course == "sybba(ca)sem-II") {
+      var pdfBuffer = SySem1ResultPdf(result);
+    } 
+    
+    else if (course == "sybba(ca)sem-II") {
       var result = await SySem2Result.findOne({
         $and: [{ rollNumber }, { motherName }],
       });
-      var pdfBuffer = SySem2ResultPdf(result);
       if (!result) {
         console.log("Result is not found");
+        return res.status(400).json({message: 'Result not found'})
       }
-    } else if (course == "tybba(ca)sem-I") {
+      var pdfBuffer = SySem2ResultPdf(result);
+    }
+    
+    else if (course == "tybba(ca)sem-I") {
       var result = await TySem1Result.findOne({
         $and: [{ rollNumber }, { motherName }],
       });
-      var pdfBuffer = TySem1ResultPdf(result);
       if (!result) {
         console.log("Result is not found");
+        return res.status(400).json({message: 'Result not found'})
       }
-    } else if (course == "tybba(ca)sem-II") {
+      var pdfBuffer = TySem1ResultPdf(result);
+    } 
+    
+    else if (course == "tybba(ca)sem-II") {
       var result = await TySem2Result.findOne({
         $and: [{ rollNumber }, { motherName }],
       });
-      var pdfBuffer = TySem2ResultPdf(result);
       if (!result) {
         console.log("Result is not found");
+        return res.status(400).json({message: 'Result not found'})
       }
+      var pdfBuffer = TySem2ResultPdf(result);
     }
 
     // res.status(200).json({data: result})
