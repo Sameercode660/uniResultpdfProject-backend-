@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node --experimental-module server.js",
-    "dev": "node --experimental-modules server.js"
+    "dev": "nodemon --experimental-modules server.js"
   },
   "author": "",
   "license": "ISC",
