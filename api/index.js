@@ -5,6 +5,9 @@ import {config} from 'dotenv'
 config()
 
 connectDB().then(()=> {
+    app.get('/', (req, res) => {
+        res.send('hello, sameer')
+    })
     app.listen(8080, ()=> {
         console.log('Server is listening on PORT 8080')
     })
